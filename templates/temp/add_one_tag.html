@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load tag_type %}
+
+{% block title %}
+电影详情
+{% endblock %}
+
+{% block navbar %}
+{% include 'film/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="mt-auto pb-auto">
+  <div class="container">
+    <h2>
+      {{ film.name }}
+      <a href="{% url 'film-play' film.url %}" class="btn btn-primary">播放</a>
+      <a href="{% url 'film-add_tag' film|next_film:film %}" class="btn btn-primary">下一个</a>
+    </h2>
+    <!-- <img src="{% static film.poster_path %}" width="40%"> -->
+    <div>
+      {% for type in tags|tag_type %}
+      <div>
+        {{ type }}: 
+        {% for c in tags|sub_tags:type %}
+        <form action="{% url 'film-add_tag' film.url %}" method="POST" style="display: inline-block">
+          {% csrf_token %}
+          {% if c in film.tags.all %}
+          <button type="submit" name="tags" value="{{ c.name }}" class="btn btn-primary">{{ c.name }}</button>
+          {% else %}
+          <button type="submit" name="tags" value="{{ c.name }}" class="btn btn-light">{{ c.name }}</button>
+          {% endif %}
+        </form>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

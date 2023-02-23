@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+演员
+{% endblock %}
+
+{% block navbar %}
+{% include 'film/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container d-flex flex-wrap">
+  <h2>演员</h2>
+  <div class="break" style="flex-basis: 100%;height: 0"></div>
+  <div class="row">
+    {% for c in actor %}
+    <div class="flex-shrink-0 card mb-3" style="width: 18rem">
+      <img class="card-img-top" src="{% static c.image_file %}">
+      <div class="card-body">
+        <h3><a href="{% url 'actor-detail' c.url %}">{{ c.name }}</a></h3>
+        <p>
+          <a href="{% url 'actor-update' c.url %}"><span class="badge bg-primary">编辑</span></a>
+          <a href="{% url 'actor-delete' c.url %}"><span class="badge bg-danger">删除</span></a>
+        </p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

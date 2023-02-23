@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+电影列表
+{% endblock %}
+
+{% block navbar %}
+{% include 'film/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container d-flex flex-wrap">
+  <h2>
+    电影列表
+  </h2>
+  {% include 'film/tag_filter.html' %}
+  <div class="break" style="flex-basis: 100%;height: 0"></div>
+  {% include 'film/film_card.html' %}
+  <div class="break" style="flex-basis: 100%;height: 0"></div>
+  <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+  </div>
+</div>
+{% endblock %}

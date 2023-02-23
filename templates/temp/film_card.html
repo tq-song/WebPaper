@@ -1,0 +1,16 @@
+{% load static %}
+{% for f in films|dictsort:"name" %}
+<div class="flex-shrink-0 card mb-3" style="width: 18rem">
+  <img class="card-img-top" src="{% static f.fanart_path %}">
+  <div class="card-body">
+    <h3><a href="{% url 'film-detail' f.url %}">{{ f.fanid }}</a></h3>
+    {% for tag in f.tags.all|dictsort:"name" %}
+    <span class="badge bg-primary">{{ tag.name }}</span>
+    {% endfor %}
+    <p>{{ f.name }}</p>
+    {% for a in f.actors.all|dictsort:"name" %}
+    <span class="badge bg-primary">{{ a.name }}</span>
+    {% endfor %}
+  </div>
+</div>
+{% endfor %}

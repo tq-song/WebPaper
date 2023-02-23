@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+操作
+{% endblock %}
+
+{% block navbar %}
+{% include 'film/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container d-flex flex-wrap">
+  <li><a href="{% url 'insert_all' %}">Insert All</a></li>
+  <li><a href="{% url 'merge' %}">Merge Actors</a></li>
+  <li><a href="{% url 'save_tag' %}">Save Tags</a></li>
+  <li><a href="{% url 'insert_tag' %}">Insert Tags</a></li>
+  <li><a href="{% url 'add_default_tag' %}">Add default Tags</a></li>
+</div>
+{% endblock %}

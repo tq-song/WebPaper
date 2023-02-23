@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+电影详情
+{% endblock %}
+
+{% block navbar %}
+{% include 'film/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="mt-auto pb-auto">
+  <div class="container">
+    <h2>
+      {{ object.name }}
+      <a href="{% url 'film-update' object.url %}"><span class="badge bg-primary">编辑</span></a>
+      <a href="{% url 'film-delete' object.url %}"><span class="badge bg-danger">删除</span></a>
+      <a href="{% url 'film-play' object.url %}"><span class="badge bg-success">播放</span></a>
+      <a href="{% url 'film-add_tag' object.url %}"><span class="badge bg-info">修改标签</span></a>
+    </h2>
+    <img src="{% static object.poster_path %}" width="80%">
+    <p>
+      导演: {{ object.director.name }}
+    </p>
+    <p>
+      演员: 
+      {% for a in object.actors.all %}
+        <span class="badge bg-info">{{ a.name }}</span>
+      {% endfor %}
+    </p>
+    <p>
+      标签: 
+      {% for t in object.tags.all %}
+        <span class="badge bg-info">{{ t.name }}</span>
+      {% endfor %}
+    </p>
+    <div class="row">
+      <p>
+        {{ object.plot }}
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+导演: {{ object.name }}
+{% endblock %}
+
+{% block navbar %}
+{% include 'film/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container d-flex flex-wrap">
+  <h2>
+    导演: {{ object.name }}
+    <a href="{% url 'actor-update' object.url %}"><span class="badge bg-primary">编辑</span></a>
+    <a href="{% url 'actor-delete' object.url %}"><span class="badge bg-danger">删除</span></a>
+  </h2>
+  {% include 'film/tag_filter.html' %}
+  <div class="break" style="flex-basis: 100%;height: 0"></div>
+  {% with object.film.all as films %}
+  {% include 'film/film_card.html' %}
+  {% endwith %}
+</div>
+{% endblock %}

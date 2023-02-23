@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load tag_type %}
+
+{% block title %}
+标签
+{% endblock %}
+
+{% block navbar %}
+{% include 'film/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container d-flex flex-wrap">
+  <div class="container">
+    <h2>标签</h2>
+    <div class="row">
+      {% for type in tag|tag_type %}
+      <ul>
+        <li>
+          <p>{{ type }}: </p>
+          {% for c in tag|sub_tags:type %}
+          <a href="{% url 'tag-detail' c.url %}" class="badge bg-info">{{ c.name }}</a>
+          {% endfor %}
+        </li>
+      </ul>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
