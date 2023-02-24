@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Journals
+{% endblock %}
+
+{% block navbar %}
+{% include 'paper/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container d-flex flex-wrap">
+  <div class="container">
+    <h2>Journals</h2>
+    <div class="row">
+      <ul class="list-group">
+        {% for c in journals %}
+        <li class="list-group-item">
+          <a href="{% url 'journal-detail' c.url %}">{{ c.name }}</a>
+          <a href="{% url 'journal-delete' c.url %}"><span class="badge bg-danger">删除</span></a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

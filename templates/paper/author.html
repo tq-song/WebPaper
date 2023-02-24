@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Authors
+{% endblock %}
+
+{% block navbar %}
+{% include 'paper/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container d-flex flex-wrap">
+  <div class="container">
+    <h2>Authors</h2>
+    <div class="row">
+      <ul class="list-group">
+        {% for c in authors %}
+        <li class="list-group-item">
+          <a href="{% url 'author-detail' c.url %}">{{ c.name }}</a>
+          <a href="{% url 'author-delete' c.url %}"><span class="badge bg-danger">删除</span></a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+新增/修改元数据
+{% endblock %}
+
+{% block navbar %}
+{% include 'paper/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="mt-auto pb-auto">
+  <div class="container">
+    <h2>新增/修改元数据</h2>
+    <div class="row">
+      <form method="post">
+        {% csrf_token %}
+        {% for f in form %}
+        <div class="col-sm-6">
+          <b>{{ f.label_tag }}</b> {{ f }}
+        </div>
+        {% endfor %}
+        <input type="submit" value="提交">
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
